@@ -15,6 +15,7 @@ Route::get('/change_tree', 'ShopController@change');
 Route::get('/up/{up}', 'ShopController@up')->name('up');
 Route::get('/down', 'ShopController@down')->name('down');
 
+Route::resource('/projects', 'ProjectsController');
 // Route::get('/projects', 'ProjectsController@index');
 // Route::get('/projects/create', 'ProjectsController@create');
 // Route::post('/projects', 'ProjectsController@store');
@@ -22,7 +23,6 @@ Route::get('/down', 'ShopController@down')->name('down');
 // Route::get('/projects/{project}/edit', 'ProjectsController@edit');
 // Route::patch('/projects/{project}', 'ProjectsController@update');
 // Route::delete('/projects/{project}', 'ProjectsController@destroy');
-Route::resource('/projects', 'ProjectsController');
 // Route::get('/', function () {
 
 //     return view('welcome');

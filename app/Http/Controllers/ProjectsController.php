@@ -23,7 +23,11 @@ class ProjectsController extends Controller
         // $project->description = $request->description;
         // $project->save();
         //old not good way
-        Project::create($request->all());
+        $valideated =  request()->validate([
+            'title' => 'required|min:3|max:5',
+            'description' => 'required|min:3'
+        ]);
+        Project::create($valideated);
         return redirect('/projects');
     }
     public function show(Project $project){

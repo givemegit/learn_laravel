@@ -9,7 +9,6 @@ class ProjectsController extends Controller
 {
     public function index(){
         $projects = Project::all();
-        // return $projects;
         return view('project.index' , compact('projects'));
     }
 
@@ -17,12 +16,6 @@ class ProjectsController extends Controller
         return view('project.create');
     }
     public function store(Request $request){
-        //old not good way
-        // $project = new Project;
-        // $project->title = $request->title;
-        // $project->description = $request->description;
-        // $project->save();
-        //old not good way
         $valideated =  request()->validate([
             'title' => 'required|min:3|max:5',
             'description' => 'required|min:3'
@@ -41,7 +34,6 @@ class ProjectsController extends Controller
         return redirect('/projects');
     }
     public function destroy(Project $project){
-
         $project->delete();
         return redirect('/projects');
     }

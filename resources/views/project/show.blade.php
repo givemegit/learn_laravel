@@ -18,6 +18,14 @@
               {{$project->description}}
               <time datetime="2016-1-1">{{$project->created_at}}</time>
             </div>
+              @if ($project->tasks->count())
+                <div class="content">
+                  <h2 class="title">Tasks</h2>
+                    @foreach ($project->tasks as $task)
+                      <div>{{$task->description}}</div>
+                    @endforeach
+                </div>
+              @endif
           </div>
           <footer class="card-footer">
             <a href="/projects/{{$project->id}}/edit" class="card-footer-item">Edit</a>

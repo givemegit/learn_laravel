@@ -3,6 +3,11 @@
 <head>
     <title>@yield('title', 'laracast projects')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css" />
+    <style>
+      .is-completed{
+        text-decoration: line-through;
+      }
+    </style>
 </head>
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">

@@ -2,39 +2,53 @@
 
 @section('content')
     <div class="container">
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title">
-              {{$project->title}}
-            </p>
-            <a href="#" class="card-header-icon" aria-label="more options">
-              <span class="icon">
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </span>
-            </a>
-          </header>
-          <div class="card-content">
-            <div class="content">
-              {{$project->description}}
-              <time datetime="2016-1-1">{{$project->created_at}}</time>
-            </div>
+              <div class="box">
+                {{$project->title}}
+                {{$project->description}}
+                <time datetime="2016-1-1">{{$project->created_at}}</time>
+              </div><!-- /.box -->
+
               @if ($project->tasks->count())
-                <div class="content">
+                <div class="box">
                   <h2 class="title">Tasks</h2>
                     @foreach ($project->tasks as $task)
-                      <div>{{$task->description}}</div>
+                     <form action="/tasks/{{$task->id}}" method="POST">
+                      @csrf
+                      @method('PATCH')
+                       <label for="completed" class=" {{$task->completed ? 'is-completed' : ''}}">
+                         <input type="checkbox" {{$task->completed ? 'checked' : ''}} name="completed" onchange="this.form.submit()" />
+                         {{$task->description}}
+                       </label>
+                     </form>
                     @endforeach
                 </div>
               @endif
-          </div>
-          <footer class="card-footer">
-            <a href="/projects/{{$project->id}}/edit" class="card-footer-item">Edit</a>
-            <form action="/projects/{{$project->id}}" method="post">
-                @csrf
-                @method('delete')
-                <button class="button" class="card-footer-item">Delete</button>
-            </form>
-          </footer>
-        </div>
+                <form action="/projects/{{$project->id}}/task" method="POST" class="box">
+                  @csrf
+                  <div class="field">
+                    <label class="label" for="description">
+                      description
+                    </label>
+                    <div class="control">
+                      <input type="text"  class="input" name="description" value="{{old('description')}}" />
+                    </div>
+                  </div><!-- /.field -->
+                  <div class="field">
+                    <div class="control">
+                      <button class="button is-link"> Add Task</button>
+                    </div>
+                  </div><!-- /.field -->
+                  @include('errors')
+                </form>
+
+            <div class="box">
+              <a href="/projects/{{$project->id}}/edit" class="">Edit</a>
+              <form action="/projects/{{$project->id}}" method="post">
+                  @csrf
+                  @method('delete')
+                  <button  class="button is-danger">Delete</button>
+              </form>
+            </div><!-- /.box -->
+
     </div>
 @endsection

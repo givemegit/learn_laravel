@@ -16,6 +16,8 @@ Route::get('/up/{up}', 'ShopController@up')->name('up');
 Route::get('/down', 'ShopController@down')->name('down');
 
 Route::resource('/projects', 'ProjectsController');
+Route::patch('/tasks/{task}', 'ProjectTaskController@update');
+Route::post('/projects/{project}/task', 'ProjectTaskController@store');
 // Route::get('/projects', 'ProjectsController@index');
 // Route::get('/projects/create', 'ProjectsController@create');
 // Route::post('/projects', 'ProjectsController@store');
